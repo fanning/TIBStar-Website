@@ -1,0 +1,316 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Animated star background */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: 
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 60% 70%, white, transparent),
+        radial-gradient(1px 1px at 50% 50%, white, transparent),
+        radial-gradient(1px 1px at 80% 10%, white, transparent),
+        radial-gradient(2px 2px at 90% 60%, white, transparent),
+        radial-gradient(1px 1px at 33% 90%, white, transparent),
+        radial-gradient(1px 1px at 15% 80%, white, transparent);
+    background-size: 200% 200%;
+    background-position: 0 0, 40% 60%, 80% 20%, 30% 80%, 70% 40%, 20% 60%, 50% 10%;
+    animation: twinkle 20s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border-radius: 10px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 40px rgba(0, 150, 255, 0.3);
+}
+
+h1 {
+    font-size: 3.5em;
+    color: #00d4ff;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    margin-bottom: 10px;
+    letter-spacing: 3px;
+}
+
+.tagline {
+    font-size: 1.2em;
+    color: #a0a0a0;
+    font-style: italic;
+}
+
+main {
+    background: rgba(26, 26, 46, 0.9);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+section {
+    margin-bottom: 50px;
+}
+
+h2 {
+    color: #00d4ff;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h3 {
+    color: #00b4d8;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #00b4d8;
+    padding-bottom: 10px;
+}
+
+h4 {
+    color: #00d4ff;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
+.hero {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero p {
+    font-size: 1.3em;
+    color: #c0c0c0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.download-section {
+    text-align: center;
+}
+
+.download-box {
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+    border: 2px solid #00d4ff;
+    border-radius: 15px;
+    padding: 40px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+}
+
+.download-info {
+    margin-bottom: 30px;
+}
+
+.version, .size, .updated {
+    color: #a0a0a0;
+    margin: 5px 0;
+}
+
+.download-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #00d4ff 0%, #0096c7 100%);
+    color: #000;
+    padding: 20px 50px;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+}
+
+.download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.6);
+    background: linear-gradient(135deg, #00e4ff 0%, #00a6d7 100%);
+}
+
+.download-icon {
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+
+.features ul {
+    list-style: none;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.features li {
+    background: rgba(0, 212, 255, 0.1);
+    margin: 10px 0;
+    padding: 15px 20px;
+    border-left: 4px solid #00d4ff;
+    border-radius: 5px;
+    font-size: 1.1em;
+}
+
+.system-requirements .requirements {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.req-column {
+    background: rgba(0, 180, 216, 0.1);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.req-column ul {
+    list-style: none;
+}
+
+.req-column li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.req-column li:last-child {
+    border-bottom: none;
+}
+
+.installation ol {
+    max-width: 700px;
+    margin: 0 auto;
+    padding-left: 20px;
+}
+
+.installation li {
+    margin: 15px 0;
+    font-size: 1.1em;
+    padding: 10px;
+    background: rgba(0, 212, 255, 0.05);
+    border-radius: 5px;
+}
+
+.installation code {
+    background: #000;
+    color: #00d4ff;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+}
+
+.server-info {
+    text-align: center;
+}
+
+.server-details {
+    background: rgba(0, 180, 216, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 20px auto;
+    border: 2px solid rgba(0, 212, 255, 0.3);
+}
+
+.server-details p {
+    margin: 10px 0;
+    font-size: 1.1em;
+}
+
+.status-online {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+.faq-item {
+    margin: 25px 0;
+    padding: 20px;
+    background: rgba(0, 212, 255, 0.05);
+    border-left: 3px solid #00d4ff;
+    border-radius: 5px;
+}
+
+.faq-item h4 {
+    margin-bottom: 10px;
+}
+
+.faq-item p {
+    color: #c0c0c0;
+    line-height: 1.7;
+}
+
+.technical ul {
+    list-style: none;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.technical li {
+    padding: 12px 20px;
+    margin: 10px 0;
+    background: rgba(0, 212, 255, 0.08);
+    border-radius: 5px;
+    border-left: 3px solid #00b4d8;
+}
+
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 60px;
+    border-top: 1px solid rgba(0, 212, 255, 0.3);
+    color: #808080;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+.disclaimer {
+    font-size: 0.9em;
+    font-style: italic;
+    color: #606060;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5em;
+    }
+    
+    h2 {
+        font-size: 2em;
+    }
+    
+    .system-requirements .requirements {
+        grid-template-columns: 1fr;
+    }
+    
+    .download-btn {
+        padding: 15px 30px;
+        font-size: 1.1em;
+    }
+}
