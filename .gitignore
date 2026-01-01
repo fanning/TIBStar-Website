@@ -17,3 +17,6 @@ npm-debug.log*
 # Temporary files
 *.tmp
 .cache/
+
+# Local Netlify folder
+.netlify

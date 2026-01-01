@@ -75,18 +75,18 @@ cd /c/Projects/TheInfiniteBlack
 
 # Copy DLLs to build directory
 cp "Assets/Assembly/bin/Release/net35/Assembly-CSharp-firstpass.dll" \
-   "Build/TIB-Recompiled_Data/Managed/"
+   "Build/TIB-Remastered_Data/Managed/"
 
 cp "Assets/Assembly/bin/Release/net35/TheInfiniteBlack.Library.dll" \
-   "Build/TIB-Recompiled_Data/Managed/"
+   "Build/TIB-Remastered_Data/Managed/"
 
 cp "Assets/Assembly/bin/Release/net35/Assembly-CSharp.dll" \
-   "Build/TIB-Recompiled_Data/Managed/"
+   "Build/TIB-Remastered_Data/Managed/"
 ```
 
 **Verify Windows build**:
 ```bash
-"/c/Projects/TheInfiniteBlack/Build/TIB-Recompiled.exe"
+"/c/Projects/TheInfiniteBlack/Build/TIB-Remastered.exe"
 ```
 
 #### 2b. Rebuild Mac Client
@@ -95,20 +95,20 @@ cp "Assets/Assembly/bin/Release/net35/Assembly-CSharp.dll" \
 cd /c/Projects/TheInfiniteBlack/Build-Mac
 
 # Remove old build
-rm -rf TIB-Recompiled.app
+rm -rf TIB-Remastered.app
 
 # Copy Mac player template
 cp -r "/c/Program Files/Unity/Hub/Editor/5.6.7f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/Variations/universal_nondevelopment_mono" \
-   "TIB-Recompiled.app"
+   "TIB-Remastered.app"
 
 # Copy game data
-cp -r "../Build/TIB-Recompiled_Data/"* "TIB-Recompiled.app/Data/"
+cp -r "../Build/TIB-Remastered_Data/"* "TIB-Remastered.app/Data/"
 
 # Copy DLLs (same ones as Windows)
-cp -r "../Build/TIB-Recompiled_Data/Managed" "TIB-Recompiled.app/Data/"
+cp -r "../Build/TIB-Remastered_Data/Managed" "TIB-Remastered.app/Data/"
 ```
 
-**Update Info.plist** in `TIB-Recompiled.app/UnityPlayer.app/Contents/Info.plist`:
+**Update Info.plist** in `TIB-Remastered.app/UnityPlayer.app/Contents/Info.plist`:
 - Ensure `CFBundleIdentifier` = `com.spellbook.theinfiniteblack`
 - Ensure `CFBundleName` = `The Infinite Black`
 - Update `CFBundleShortVersionString` to new version (e.g., `1.4.8`)
@@ -268,7 +268,7 @@ Verify:
 
 **Windows**:
 1. Download `TIB-Remastered-v1.4.8-Windows.zip`
-2. Extract and run `TIB-Recompiled.exe`
+2. Extract and run `TIB-Remastered.exe`
 3. Check version in client (if displayed)
 4. Verify connection to server works
 
@@ -311,7 +311,7 @@ Track versions here for reference:
 **Solution**:
 ```bash
 # Clear and rebuild
-rm -rf /c/Projects/TheInfiniteBlack/Build/TIB-Recompiled_Data/Managed/*
+rm -rf /c/Projects/TheInfiniteBlack/Build/TIB-Remastered_Data/Managed/*
 # Then rebuild all 3 assemblies and copy DLLs
 ```
 
@@ -320,7 +320,7 @@ rm -rf /c/Projects/TheInfiniteBlack/Build/TIB-Recompiled_Data/Managed/*
 **Problem**: Info.plist not updated
 
 **Solution**:
-Edit `Build-Mac/TIB-Recompiled.app/UnityPlayer.app/Contents/Info.plist`:
+Edit `Build-Mac/TIB-Remastered.app/UnityPlayer.app/Contents/Info.plist`:
 ```xml
 <key>CFBundleShortVersionString</key>
 <string>1.4.8</string>

@@ -33,17 +33,17 @@ $websiteRoot = "C:\Projects\TIBStar-Website"
 $downloadsDir = "$websiteRoot\downloads"
 
 # Check if new builds exist
-$windowsBuildExists = Test-Path "$projectRoot\Build\TIB-Recompiled.exe"
-$macBuildExists = Test-Path "$projectRoot\Build-Mac\TIB-Recompiled.app"
+$windowsBuildExists = Test-Path "$projectRoot\Build\TIB-Remastered.exe"
+$macBuildExists = Test-Path "$projectRoot\Build-Mac\TIB-Remastered.app"
 
 if (-not $windowsBuildExists) {
-    Write-Host "ERROR: Windows build not found at $projectRoot\Build\TIB-Recompiled.exe" -ForegroundColor Red
+    Write-Host "ERROR: Windows build not found at $projectRoot\Build\TIB-Remastered.exe" -ForegroundColor Red
     Write-Host "Please rebuild the Windows client first." -ForegroundColor Red
     exit 1
 }
 
 if (-not $macBuildExists) {
-    Write-Host "ERROR: Mac build not found at $projectRoot\Build-Mac\TIB-Recompiled.app" -ForegroundColor Red
+    Write-Host "ERROR: Mac build not found at $projectRoot\Build-Mac\TIB-Remastered.app" -ForegroundColor Red
     Write-Host "Please rebuild the Mac client first." -ForegroundColor Red
     exit 1
 }
@@ -69,7 +69,7 @@ Write-Host ""
 # Package Mac client
 Write-Host "Packaging Mac client..." -ForegroundColor Yellow
 $macZipPath = "$downloadsDir\TIB-Remastered-v$NewVersion-macOS.zip"
-Compress-Archive -Path "$projectRoot\Build-Mac\TIB-Recompiled.app" -DestinationPath $macZipPath -Force
+Compress-Archive -Path "$projectRoot\Build-Mac\TIB-Remastered.app" -DestinationPath $macZipPath -Force
 $macSize = [math]::Round((Get-Item $macZipPath).Length / 1MB, 0)
 Write-Host "✓ Mac client packaged: $macSize MB" -ForegroundColor Green
 Write-Host ""
