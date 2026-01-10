@@ -1,0 +1,22 @@
+# Netlify configuration for TIBStar Website + ChatCan RAG Interface
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Redirect /rag/api calls to the Netlify function
+[[redirects]]
+  from = "/api/rag/*"
+  to = "/.netlify/functions/rag-proxy/:splat"
+  status = 200
+
+# Environment variables (set in Netlify dashboard):
+# RAG_API_URL = http://44.219.6.212:8081
+# RAG_API_KEY = <your-rag-api-key>
+
+# Custom domain configuration
+# tibstar.com - main TIB download site
+# chatcan.com - alias, can access /rag/ for RAG interface
