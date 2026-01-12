@@ -1,6 +1,6 @@
 /**
  * Netlify Edge Function to proxy RAG API requests from chatcan.com
- * This allows the web interface to access the RAG without exposing the API key
+ * Supports both /search and /stats endpoints for MCP compatibility
  */
 
 const RAG_API_URL = process.env.RAG_API_URL || 'http://44.219.6.212:8081';
@@ -16,43 +16,57 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    // Parse request
-    const { query, n_results = 10, role_filter } = event.httpMethod === 'GET'
-      ? event.queryStringParameters || {}
-      : JSON.parse(event.body || '{}');
+    // Determine which endpoint to call
+    const params = event.queryStringParameters || {};
+    const isStats = params.endpoint === 'stats';
 
-    if (!query) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: 'Query parameter required' })
-      };
-    }
-
-    // Build query params
-    const params = new URLSearchParams({
-      query,
-      n_results: n_results.toString()
-    });
-    if (role_filter) {
-      params.append('role_filter', role_filter);
-    }
-
-    // Forward request to RAG API with API key
-    const response = await fetch(`${RAG_API_URL}/api/search?${params}`, {
-      method: 'GET',
+    let targetUrl;
+    let fetchOptions = {
       headers: {
         'X-API-Key': RAG_API_KEY,
         'Content-Type': 'application/json'
       }
-    });
+    };
 
+    if (isStats) {
+      // Stats endpoint
+      targetUrl = `${RAG_API_URL}/api/stats`;
+      fetchOptions.method = 'GET';
+    } else {
+      // Search endpoint
+      const { query, n_results = 10, role_filter } = event.httpMethod === 'GET'
+        ? params
+        : JSON.parse(event.body || '{}');
+
+      if (!query) {
+        return {
+          statusCode: 400,
+          body: JSON.stringify({ error: 'Query parameter required' })
+        };
+      }
+
+      // Build query params
+      const searchParams = new URLSearchParams({
+        query,
+        n_results: n_results.toString()
+      });
+      if (role_filter) {
+        searchParams.append('role_filter', role_filter);
+      }
+
+      targetUrl = `${RAG_API_URL}/api/search?${searchParams}`;
+      fetchOptions.method = 'GET';
+    }
+
+    // Forward request to RAG API with API key
+    const response = await fetch(targetUrl, fetchOptions);
     const data = await response.json();
 
     return {
       statusCode: response.status,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': 'https://chatcan.com',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST',
         'Access-Control-Allow-Headers': 'Content-Type'
       },
